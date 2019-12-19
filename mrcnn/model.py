@@ -24,11 +24,19 @@ import keras.engine as KE
 import keras.models as KM
 
 from mrcnn import utils
+import imgaug
 
 # Requires TensorFlow 1.3+ and Keras 2.0.8+.
 from distutils.version import LooseVersion
 assert LooseVersion(tf.__version__) >= LooseVersion("1.3")
 assert LooseVersion(keras.__version__) >= LooseVersion('2.0.8')
+
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+
+import tensorflow as tf
+config = tf.ConfigProto()
+config.gpu_options.allow_growth=True
+sess = tf.Session(config=config)
 
 
 ############################################################
@@ -2337,10 +2345,10 @@ class MaskRCNN():
 
         # Callbacks
         callbacks = [
-            keras.callbacks.TensorBoard(log_dir=self.log_dir,
-                                        histogram_freq=0, write_graph=True, write_images=False),
-            keras.callbacks.ModelCheckpoint(self.checkpoint_path,
-                                            verbose=0, save_weights_only=True),
+            keras.callbacks.TensorBoard(log_dir=self.log_dir),
+            keras.callbacks.ReduceLROnPlateau(monitor='val_loss', factor=0.1, patience=3, verbose=1),
+            keras.callbacks.EarlyStopping(monitor='val_loss', min_delta=0, patience=20, verbose=1),
+            keras.callbacks.ModelCheckpoint(self.checkpoint_path + 'ep{epoch:03d}-loss{loss:.3f}-val_loss{val_loss:.3f}.h5', monitor='val_loss', save_weights_only=True, save_best_only=True, period=1, verbose=1),
         ]
 
         # Add custom callbacks to the list
@@ -2372,6 +2380,7 @@ class MaskRCNN():
             max_queue_size=100,
             workers=workers,
             use_multiprocessing=True,
+            verbose=1
         )
         self.epoch = max(self.epoch, epochs)
 
