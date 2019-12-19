@@ -1,5 +1,7 @@
 # Tiny Pascal VOC Instance Segmentation
 
+<img src="images/01.png" width="200" height="150"><img src="images/02.png" width="200" height="150"><img src="images/03.png" width="200" height="150"><img src="images/04.png" width="200" height="150"><img src="images/05.png" width="200" height="150">
+
 To read the detailed , please, refer to [CS_IOC5008_HW4](https://github.com/NCTU-VRDL/CS_IOC5008/tree/master/HW4)<br>
 Based on https://github.com/matterport/Mask_RCNN
 
