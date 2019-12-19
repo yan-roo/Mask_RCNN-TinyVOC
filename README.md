@@ -1,6 +1,6 @@
 # Tiny Pascal VOC Instance Segmentation
 
-To read the detailed , please, refer to [CS_IOC5008_HW4](https://github.com/NCTU-VRDL/CS_IOC5008/tree/master/HW4)
+To read the detailed , please, refer to [CS_IOC5008_HW4](https://github.com/NCTU-VRDL/CS_IOC5008/tree/master/HW4)<br>
 Based on https://github.com/matterport/Mask_RCNN
 
 ## Hardware
@@ -64,7 +64,7 @@ The expected training times are:
 Model | GPUs  | Training Epochs | Training Time
 ------------ | ------------- | ------------- | -------------
 ResNet50 | 1x TitanXp | 160 | 11 hours
-ResNet101 | 1x TitanXp | 1024 | 14 hours
+ResNet101 | 1x TitanXp | 160 | 14 hours
 
 
 
