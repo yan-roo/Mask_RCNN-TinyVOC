@@ -2347,7 +2347,7 @@ class MaskRCNN():
         callbacks = [
             keras.callbacks.TensorBoard(log_dir=self.log_dir),
             keras.callbacks.ReduceLROnPlateau(monitor='val_loss', factor=0.1, patience=3, verbose=1),
-            keras.callbacks.EarlyStopping(monitor='val_loss', min_delta=0, patience=20, verbose=1),
+            keras.callbacks.EarlyStopping(monitor='val_loss', min_delta=0, patience=10, verbose=1),
             keras.callbacks.ModelCheckpoint(self.checkpoint_path + 'ep{epoch:03d}-loss{loss:.3f}-val_loss{val_loss:.3f}.h5', monitor='val_loss', save_weights_only=True, save_best_only=True, period=1, verbose=1),
         ]
 
