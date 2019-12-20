@@ -6,7 +6,7 @@ import numpy as np
 import skimage.draw
 from bs4 import BeautifulSoup as bs
 import cv2
-import imgaug
+import imgaug.augmenters as iaa
 
 # Root directory of the project
 ROOT_DIR = os.path.abspath("../../")
@@ -329,10 +329,24 @@ if __name__ == '__main__':
 
         # Image Augmentation
         # Right/Left flip 50% of the time
-        augmentation = imgaug.augmenters.Sometimes(0.5, [
-                    imgaug.augmenters.Fliplr(0.5),
-                    imgaug.augmenters.GaussianBlur(sigma=(0.0, 5.0))
-                ])
+
+        augmentation = iaa.Sequential([
+            iaa.Fliplr(0.5), # horizontal flips
+            iaa.Crop(percent=(0, 0.1)), # random crops
+
+            # Strengthen or weaken the contrast in each image.
+            iaa.ContrastNormalization((0.75, 1.5)),
+
+            # Apply affine transformations to each image.
+            # Scale/zoom them, translate/move them, rotate them and shear them.
+            iaa.Affine(
+                scale={"x": (0.8, 1.2), "y": (0.8, 1.2)},
+                translate_percent={"x": (-0.2, 0.2), "y": (-0.2, 0.2)},
+                rotate=(-7, 7),
+                shear=(-2, 2))
+            ], random_order=True) # apply augmenters in random order
+
+
 
         # *** This training schedule is an example. Update to your needs ***
 

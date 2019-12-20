@@ -123,8 +123,10 @@ class Config(object):
     #         size IMAGE_MIN_DIM x IMAGE_MIN_DIM. Can be used in training only.
     #         IMAGE_MAX_DIM is not used in this mode.
     IMAGE_RESIZE_MODE = "square"
-    IMAGE_MIN_DIM = 800
-    IMAGE_MAX_DIM = 1024
+    # IMAGE_MIN_DIM = 800
+    # IMAGE_MAX_DIM = 1024
+    IMAGE_MIN_DIM = 512
+    IMAGE_MAX_DIM = 512
     # Minimum scaling ratio. Checked after MIN_IMAGE_DIM and can force further
     # up scaling. For example, if set to 2 then images are scaled up to double
     # the width and height, or more, even if MIN_IMAGE_DIM doesn't require it.
@@ -157,14 +159,14 @@ class Config(object):
     MASK_SHAPE = [28, 28]
 
     # Maximum number of ground truth instances to use in one image
-    MAX_GT_INSTANCES = 100
+    MAX_GT_INSTANCES = 20 #100
 
     # Bounding box refinement standard deviation for RPN and final detections.
     RPN_BBOX_STD_DEV = np.array([0.1, 0.1, 0.2, 0.2])
     BBOX_STD_DEV = np.array([0.1, 0.1, 0.2, 0.2])
 
     # Max number of final detections
-    DETECTION_MAX_INSTANCES = 100
+    DETECTION_MAX_INSTANCES = 20 #100
 
     # Minimum probability value to accept a detected instance
     # ROIs below this threshold are skipped
@@ -177,11 +179,13 @@ class Config(object):
     # The Mask RCNN paper uses lr=0.02, but on TensorFlow it causes
     # weights to explode. Likely due to differences in optimizer
     # implementation.
-    LEARNING_RATE = 0.0001
+    #LEARNING_RATE = 0.0001
+    LEARNING_RATE = 0.001
     LEARNING_MOMENTUM = 0.9
 
     # Weight decay regularization
-    WEIGHT_DECAY = 0.0001
+    # WEIGHT_DECAY = 0.0001
+    WEIGHT_DECAY = 0.001
 
     # Loss weights for more precise optimization.
     # Can be used for R-CNN training setup.
